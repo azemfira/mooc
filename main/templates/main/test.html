@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test page</title>
+    <style>@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  font-family: inherit;
+  padding: 10px 50px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #f4f4f4;
+  background-color: #7e7f80;
+  color: #f4f4f4;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.btn:hover {
+  background-color: #7e7f80;
+  transform: scale(0.98);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin-top: 100px;
+  margin-bottom: 80px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+  background-color:  #7e7f80;
+  position: relative;
+}
+
+.quiz-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 80%;
+  color: #222;
+  background-color: #7e7f80;
+  transform: skewY(-10deg);
+  transform-origin: top left;
+  z-index: -1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.quiz-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 80%;
+  color: #222;
+  background-color: #7e7f80;
+  transform: skewY(10deg);
+  transform-origin: top right;
+  z-index: -1;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.question-container {
+  padding: 50px;
+  width: 80%;
+  border-bottom: 2px solid #7e7f80;
+  margin: 30px 0;
+}
+
+.question-container h3 {
+  font-size: 1.4rem;
+}
+
+.question-container label {
+  font-size: 1.1rem;
+}
+
+.quiz-header {
+  background-color: #7e7f80;
+  width: 90%;
+  height: 210px;
+  padding: 80px;
+  margin: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.quiz-header h1.hidden {
+  display: none;
+}
+
+.quiz-header h1 {
+  display: block;
+  font-size: 3rem;
+  border-bottom: 5px solid #222;
+  text-align: center;
+  width: 50%;
+}
+
+.end-message.hidden {
+  display: none;
+}
+
+.inner-message {
+  margin-top: 40px;
+}
+
+.end-message {
+  display: block;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.play-again-button {
+  margin-top: 20px;
+  z-index: 2;
+}
+
+.quiz-header::before {
+  content: "";
+  position: absolute;
+  bottom: -70%;
+  right: 0;
+  width: 50.1%;
+  height: 80%;
+  color: #222;
+  transform: skewY(-10deg);
+  transform-origin: top left;
+  z-index: 1;
+  background-image: linear-gradient(
+    to top,
+    #7e7f80
+  );
+}
+
+.quiz-header::after {
+  content: "";
+  position: absolute;
+  bottom: -70%;
+  left: 0;
+  width: 50%;
+  height: 80%;
+  color: #222;
+  transform: skewY(10deg);
+  transform-origin: top right;
+  z-index: 1;
+  background-image: linear-gradient(
+    to top,
+    #7e7f80
+  );
+}
+
+.question {
+  margin-bottom: 10px;
+}
+
+.answer {
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.answer input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* BACKGROUND NUMBERS */
+
+.question1 {
+  position: relative;
+}
+
+.quiz-container .question1::before {
+  content: "1";
+  top: -80px;
+  right: -50px;
+  color: #7e7f80;
+  position: absolute;
+  font-size: 20rem;
+  font-weight: 700;
+  opacity: 0.2;
+  text-shadow: white 0px 5px 3px;
+}
+
+.question2 {
+  position: relative;
+}
+
+.quiz-container .question2::before {
+  content: "2";
+  top: -80px;
+  right: -50px;
+  color: #7e7f80;
+  position: absolute;
+  font-size: 20rem;
+  font-weight: 700;
+  opacity: 0.2;
+  text-shadow: white 0px 5px 3px;
+}
+
+.question3 {
+  position: relative;
+}
+
+.quiz-container .question3::before {
+  content: "3";
+  top: -80px;
+  right: -50px;
+  color:  #7e7f80;
+  position: absolute;
+  font-size: 20rem;
+  font-weight: 700;
+  opacity: 0.2;
+  text-shadow: white 0px 5px 3px;
+}
+
+.question4 {
+  position: relative;
+}
+
+.quiz-container .question4::before {
+  content: "4";
+  top: -80px;
+  right: -50px;
+  color:  #7e7f80;
+  position: absolute;
+  font-size: 20rem;
+  font-weight: 700;
+  opacity: 0.2;
+  text-shadow: white 0px 5px 3px;
+}
+
+.question5 {
+  position: relative;
+}
+
+.quiz-container .question5::before {
+  content: "5";
+  top: -80px;
+  right: -50px;
+  color:  #7e7f80;
+  position: absolute;
+  font-size: 20rem;
+  font-weight: 700;
+  opacity: 0.2;
+  text-shadow: white 0px 5px 3px;
+}
+
+.question6 {
+  position: relative;
+}
+
+.quiz-container .question6::before {
+  content: "6";
+  top: -80px;
+  right: -50px;
+  color:  #7e7f80;
+  position: absolute;
+  font-size: 20rem;
+  font-weight: 700;
+  opacity: 0.2;
+  text-shadow: white 0px 5px 3px;
+}
+
+@media (max-width: 300px) {
+  .quiz-header {
+    padding: 60px;
+  }
+  .quiz-container .question1::before {
+    right: -40px;
+  }
+
+  .quiz-container .question2::before {
+    right: -40px;
+  }
+
+  .quiz-container .question3::before {
+    right: -40px;
+  }
+
+  .quiz-container .question4::before {
+    right: -30px;
+  }
+
+  .quiz-container .question5::before {
+    right: -40px;
+  }
+
+  .quiz-container .question6::before {
+    right: -40px;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="quiz-header">
+    <h1 class="quiz-title">Тесты</h1>
+    <div class="end-message hidden">
+      <h2 class="inner-message">10 Правильных ответов!</h2>
+      <button class="btn play-again-button">2 шанс</button>
+    </div>
+  </div>
+  <form class="quiz-container">
+  <div class="question-container question1">
+    <h3 class="question">
+     1. Какое из утверждений относительно генеральной и выборочной совокупностей является верным?
+    </h3>
+    <div class="answer">
+      <input type="radio" name="answer1" value="A">
+      <label for="answer">генеральная совокупность – часть выборочной</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer1"  value="B">
+      <label for="answer" class="green">выборочная совокупность – часть генеральной</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer1"  value="C">
+      <label for="answer">выборочная и генеральная совокупности равны по численности</label>
+    </div>
+  </div>
+  <div class="question-container question2">
+    <h3 class="question">
+      2. Сумма частот признака равна:
+    </h3>
+    <div class="answer">
+      <input type="radio" name="answer2"  value="A">
+      <label for="answer" class="green"> объему выборки n</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer2"  value="B">
+      <label for="answer">0</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer2"  value="C">
+      <label for="answer">1</label>
+    </div>
+  </div>
+  <div class="question-container question3">
+    <h3 class="question">
+      3.Что означает HTML?
+    </h3>
+    <div class="answer">
+      <input type="radio" name="answer3"  value="A">
+      <label for="answer">Hyper Transcript Mark List</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer3"  value="B">
+      <label for="answer">Hypo Transcript Mark List</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer3"  value="C">
+      <label for="answer" class="green">Hyper Text Markup Language</label>
+    </div>
+  </div>
+  <div class="question-container question4">
+    <h3 class="question">
+      4.Какой из них НЕ является языком программирования?
+    </h3>
+    <div class="answer">
+      <input type="radio" name="answer4"  value="A">
+      <label for="answer">Javascript</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer4"  value="B">
+      <label for="answer">Java</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer4"  value="C">
+      <label for="answer" class="green">Kuberscript</label>
+    </div>
+  </div>
+  <div class="question-container question5">
+    <h3 class="question">
+      5. Как вычислить площадь круга?
+    </h3>
+    <div class="answer">
+      <input type="radio" name="answer5"  value="A">
+      <label for="answer" class="green">A = π * r²</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer5"  value="B">
+      <label for="answer">A = 2π * r²</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer5"  value="C">
+      <label for="answer">A = π * r</label>
+    </div>
+  </div>
+  <div class="question-container question6">
+    <h3 class="question">
+      6.Какова химическая формула серной кислоты?
+    </h3>
+    <div class="answer">
+      <input type="radio" name="answer6"  value="A">
+      <label for="answer" class="green">H₂SO₄</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer6"  value="B">
+      <label for="answer">HSO₄</label>
+    </div>
+    <div class="answer">
+      <input type="radio" name="answer6"  value="C">
+      <label for="answer">H₄SO₂</label>
+    </div>
+  </div>
+  <button class="btn submit-btn" type="submit">Отправить</button>
+</form>
+  <script>const correctAnswers = ['B', 'A', 'C', 'C', 'A', 'A'];
+
+const form = document.querySelector('.quiz-container');
+const quizTitle = document.querySelector('.quiz-title');
+const endMessage = document.querySelector('.end-message');
+const innerMessage = document.querySelector('.inner-message')
+const playAgainBtn = document.querySelector('.play-again-button');
+const green = document.querySelectorAll('.green')
+
+//---------------------------------------------------------------
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let score = 0;
+
+    const userAnswers = [form.answer1.value, form.answer2.value, form.answer3.value, form.answer4.value, form.answer5.value, form.answer6.value];
+
+    userAnswers.forEach((answer, index) => {
+        if (answer === correctAnswers[index]) {
+            score += Math.round(100 / 6);
+            if (score > 100) {
+                score = 100
+            }
+        } else {
+            score
+        }
+    });
+
+    quizTitle.classList.add('hidden');
+    endMessage.classList.remove('hidden');
+    innerMessage.textContent = `${ score }% правильные ответы!`;
+    green.forEach((answer) => {
+        answer.style.color = 'greenyellow';
+    });
+
+    scrollTo(top);
+
+    playAgainBtn.addEventListener('click', () => {
+        location.reload();
+    });
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>
